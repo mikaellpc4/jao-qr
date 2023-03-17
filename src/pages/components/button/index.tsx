@@ -4,7 +4,12 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({ children, type, name, ...rest }: ButtonProps) {
   return (
-    <button id={name} type={type} name={name} {...rest}>
+    <button
+      type={type}
+      name={name}
+      {...rest}
+      className="h-14 w-3/4 max-w-[30rem] self-center rounded-xl border-2 border-black text-2xl font-semibold sm:self-auto"
+    >
       {children}
     </button>
   );
