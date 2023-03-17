@@ -21,6 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.6",
+    "react-qr-code": "^2.0.11",
     "superjson": "1.9.1",
     "zod": "^3.20.6"
   },
