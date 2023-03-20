@@ -9,6 +9,7 @@ import { z } from "zod";
 import type { InputProps } from "../components/input/props";
 import { useState } from "react";
 import QRCode from "react-qr-code";
+import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -23,15 +24,8 @@ const Home: NextPage = () => {
     profileLink: string;
   };
 
+  const { mutateAsync: createEmployee } = api.employee.create.useMutation();
   const [profileQR, setProfileQR] = useState<ProfileQRProps | null>(null);
-
-  const formSubmit = (data: GenerateQRCodeInputs) => {
-    console.log({ data });
-    setProfileQR({
-      ...data,
-      profileLink: data.github,
-    });
-  };
 
   const generateQRCodeSchema = z.object({
     name: z.string().nonempty("This field cannot be empety"),
@@ -58,6 +52,20 @@ const Home: NextPage = () => {
   } = useForm<GenerateQRCodeInputs>({
     resolver: zodResolver(generateQRCodeSchema),
   });
+
+  const formSubmit = async (data: GenerateQRCodeInputs): Promise<void> => {
+    const { name, linkedin, github } = data;
+    const newEmployee = await createEmployee({
+      name,
+      linkedin,
+      github,
+    });
+    const newEmployeeId = newEmployee.id;
+    setProfileQR({
+      ...data,
+      profileLink: `${window.location.origin}/employee/${newEmployeeId}`,
+    });
+  };
 
   const inputs: InputProps[] = [
     {

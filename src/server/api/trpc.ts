@@ -15,7 +15,7 @@
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
-
+import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "~/server/db";
 
 type CreateContextOptions = Record<string, never>;
@@ -30,9 +30,22 @@ type CreateContextOptions = Record<string, never>;
  *
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-const createInnerTRPCContext = (_opts: CreateContextOptions) => {
+
+export const createInnerTRPCContext = (opts: CreateContextOptions) => {
+  const getRequest = () => {
+    if (opts.req) {
+      return opts.req as NextApiRequest;
+    }
+  };
+  const getResponse = () => {
+    if (opts.res) {
+      return opts.res as NextApiResponse;
+    }
+  };
   return {
     prisma,
+    req: getRequest(),
+    res: getResponse(),
   };
 };
 
