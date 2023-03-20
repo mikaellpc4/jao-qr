@@ -127,7 +127,7 @@ const Home: NextPage = () => {
               href={profileQR.profileLink}
               target="_blank"
             >
-              <QRCode value={profileQR.profileLink} />
+              <QRCode value={profileQR.profileLink} name="QRCode" />
             </a>
             <div className="flex flex-col items-center font-semibold">
               <p> {profileQR.name}</p>

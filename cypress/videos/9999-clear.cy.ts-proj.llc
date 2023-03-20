@@ -1,0 +1,11 @@
+{
+  version: 1,
+  mediaFileName: '9999-clear.cy.ts.mp4',
+  cutSegments: [
+    {
+      start: 0,
+      end: 0.825,
+      name: 'Clear Cache Should clear url cache',
+    },
+  ],
+}
