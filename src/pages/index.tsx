@@ -1,14 +1,12 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
-import { api } from "~/utils/api";
-import { Button } from "./components/button";
-import { Input } from "./components/input";
+import { Button } from "../components/button";
+import { Input } from "../components/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { InputProps } from "./components/input/props";
+import type { InputProps } from "../components/input/props";
 import { useState } from "react";
 import QRCode from "react-qr-code";
 
@@ -41,14 +39,14 @@ const Home: NextPage = () => {
       .string()
       .nonempty("This field cannot be empety")
       .url("You must provide a valid linkedin url")
-      .includes("https://www.linkedin.com/", {
+      .includes("linkedin.com", {
         message: "You must provide a valid linkedin url",
       }),
     github: z
       .string()
       .nonempty("This field cannot be empety")
       .url("You must provide a valid github url")
-      .includes("https://github.com/", {
+      .includes("github.com", {
         message: "You must provide a valid github url",
       }),
   });
@@ -66,7 +64,7 @@ const Home: NextPage = () => {
       name: "name",
       displayName: "Name",
       register,
-      placeholder: "Nome",
+      placeholder: "Name",
       error: errors.name?.message,
     },
     {
@@ -98,7 +96,7 @@ const Home: NextPage = () => {
           className="flex w-full max-w-4xl flex-col gap-8"
         >
           <h1 className="ml-[0%] xs:ml-[15%]">QR Code Image Generator</h1>
-          <div className="flex w-full flex-col gap-4">
+          <div className="flex w-full flex-col gap-10">
             {inputs.map((input) => {
               return (
                 <Input
@@ -116,7 +114,13 @@ const Home: NextPage = () => {
         </form>
         {profileQR && (
           <div className="flex flex-col items-center gap-4">
-            <QRCode value={profileQR.profileLink} />
+            <a
+              className="text-blue-600 hover:underline dark:text-blue-500"
+              href={profileQR.profileLink}
+              target="_blank"
+            >
+              <QRCode value={profileQR.profileLink} />
+            </a>
             <div className="flex flex-col items-center font-semibold">
               <p> {profileQR.name}</p>
               <p> {profileQR.github} </p>
