@@ -1,3 +1,9 @@
+# Project
+
+Project created using T3 Stack
+
+Deployed in a VPS, deploy link: http://144.22.164.147:3000/
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
