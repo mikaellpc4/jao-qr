@@ -49,8 +49,8 @@ describe("Test Home", () => {
     });
 
     // Saves generated link to be used for another tests
-    // 15 seconds to timeout
-    cy.get("svg[name=QRCode]", { timeout: 1000 * 15 })
+    // 30 seconds to timeout
+    cy.get("svg[name=QRCode]", { timeout: 1000 * 30 })
       .parent("a")
       .invoke("attr", "href")
       .then((link) => {

@@ -10,6 +10,7 @@ import type { InputProps } from "../components/input/props";
 import { useState } from "react";
 import QRCode from "react-qr-code";
 import { api } from "~/utils/api";
+import { Loading } from "~/components/loading";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -24,7 +25,8 @@ const Home: NextPage = () => {
     profileLink: string;
   };
 
-  const { mutateAsync: createEmployee } = api.employee.create.useMutation();
+  const { mutateAsync: createEmployee, isLoading } =
+    api.employee.create.useMutation();
   const [profileQR, setProfileQR] = useState<ProfileQRProps | null>(null);
 
   const generateQRCodeSchema = z.object({
@@ -118,7 +120,7 @@ const Home: NextPage = () => {
               );
             })}
           </div>
-          <Button>Generate Image</Button>
+          <Button>{isLoading ? <Loading /> : "Generate Image"}</Button>
         </form>
         {profileQR && (
           <div className="flex flex-col items-center gap-4">
