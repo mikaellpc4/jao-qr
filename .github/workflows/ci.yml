@@ -1,0 +1,22 @@
+name: JoaoQR CI
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@1
+      - name: Deploy to Host
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: $({secrets.SERVER_SSH_KEY})
+          ARGS: "-rlgoDzvc -i"
+          SOURCE: "src/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
