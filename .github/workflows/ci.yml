@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@1
+        uses: actions/checkout@v3
       - name: Deploy to Host
         uses: easingthemes/ssh-deploy@main
         env:
@@ -19,3 +19,5 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
+          SCRIPT_AFTER: |
+            sudo docker compose up --build --force-recreate
