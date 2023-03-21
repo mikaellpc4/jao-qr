@@ -18,7 +18,7 @@ jobs:
       - name: Deploy to Host
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: $({secrets.SERVER_SSH_KEY})
+          SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
           ARGS: "-rlgoDzvc -i"
           SOURCE: "src/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
