@@ -1,0 +1,8 @@
+services:
+  app:
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    image: docker-next-js-app
+    build: .
+    ports:
+      - 3000:3000

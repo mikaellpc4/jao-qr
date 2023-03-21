@@ -9,8 +9,8 @@ import { z } from "zod";
 import type { InputProps } from "../components/input/props";
 import { useState } from "react";
 import QRCode from "react-qr-code";
-import { api } from "~/utils/api";
-import { Loading } from "~/components/loading";
+import { api } from "../utils/api";
+import { Loading } from "../components/loading";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
