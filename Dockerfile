@@ -9,9 +9,16 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
-COPY . .
+COPY prisma ./prisma
 
 RUN pnpm prisma generate
 
+FROM dependencies AS prod
+
+COPY . . 
+
 EXPOSE 3000
-CMD ["pnpm", "dev"]
+
+RUN pnpm build
+
+CMD ["pnpm", "start"]
