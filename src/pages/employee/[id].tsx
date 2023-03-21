@@ -84,6 +84,11 @@ export const getStaticProps = async (
       },
     };
   }
+  return {
+    redirect: {
+      destination: "/",
+    },
+  };
 };
 
 export default EmployeePage;
